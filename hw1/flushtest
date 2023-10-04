@@ -1,0 +1,9 @@
+cd $1
+ls | xargs -l fgrep ../allcards -e | cut --complement -c 1,2
+ls *S 2> /dev/null | wc -l > tempfileS
+ls *D 2> /dev/null | wc -l > tempfileD
+ls *H 2> /dev/null | wc -l > tempfileH
+ls *C 2> /dev/null | wc -l > tempfileC
+echo Flush! > Flush
+paste tempfileC Flush | fgrep 5 | cut --complement -c 1-2 ; paste tempfileH Flush | fgrep 5 | cut --complement -c 1-2 ; paste tempfileS Flush | fgrep 5 | cut --complement -c 1-2 ; paste tempfileD Flush | fgrep 5 | cut --complement -c 1-2
+rm -f Flush tempfileC tempfileD tempfileH tempfileS
